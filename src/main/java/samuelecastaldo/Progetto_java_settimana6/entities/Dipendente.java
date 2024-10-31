@@ -1,9 +1,6 @@
 package samuelecastaldo.Progetto_java_settimana6.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "dipendenti")
@@ -15,14 +12,17 @@ public class Dipendente {
     private String nome;
     private String cognome;
     private String email;
+    @Column(name = "avatar_url")
+    private String avatarUrl;
 
     public Dipendente() {}
 
-    public Dipendente(String username, String nome, String cognome, String email) {
+    public Dipendente(String username, String nome, String cognome, String email, String avatarUrl) {
         this.username = username;
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;
+        this.avatarUrl = avatarUrl;
     }
 
     public long getId() {
@@ -61,6 +61,14 @@ public class Dipendente {
         this.email = email;
     }
 
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
+
     @Override
     public String toString() {
         return "Dipendente{" +
@@ -69,6 +77,7 @@ public class Dipendente {
                 ", nome='" + nome + '\'' +
                 ", cognome='" + cognome + '\'' +
                 ", email='" + email + '\'' +
+                ", avatarUrl='" + avatarUrl + '\'' +
                 '}';
     }
 }

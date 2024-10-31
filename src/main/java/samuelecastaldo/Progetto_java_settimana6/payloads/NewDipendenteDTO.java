@@ -12,6 +12,7 @@ public record NewDipendenteDTO(
         String cognome,
         @NotEmpty(message = "L'email è obbligatoria")
         @Email(message = "L'email deve essere valida")
-        String email
+        String email,
+        String avatarUrl
 ) {
 }
