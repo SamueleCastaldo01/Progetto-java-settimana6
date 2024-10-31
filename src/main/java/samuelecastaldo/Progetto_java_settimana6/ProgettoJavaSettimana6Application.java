@@ -11,4 +11,5 @@ public class ProgettoJavaSettimana6Application {
 		SpringApplication.run(ProgettoJavaSettimana6Application.class, args);
 	}
 
+
 }
