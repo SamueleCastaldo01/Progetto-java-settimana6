@@ -11,6 +11,7 @@ import samuelecastaldo.Progetto_java_settimana6.payloads.NewDipendenteDTO;
 import samuelecastaldo.Progetto_java_settimana6.services.DipendenteService;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
@@ -25,6 +26,11 @@ public class DipendenteController {
         return this.dipendenteService.findAll();
     }
 
+    @GetMapping("/{id}")
+    public Dipendente findById(@PathVariable long id) {
+        return this.dipendenteService.findById(id);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Dipendente save(@RequestBody @Validated NewDipendenteDTO body, BindingResult validationResult) {
@@ -35,5 +41,21 @@ public class DipendenteController {
         }
 
         return this.dipendenteService.save(body);
+    }
+
+    @PutMapping("/{id}")
+    public Dipendente findByIdAndUpdate(@PathVariable long id, @RequestBody @Validated NewDipendenteDTO body, BindingResult validationResult) {
+        if (validationResult.hasErrors()) {
+            validationResult.getAllErrors().forEach(System.out::println);
+            throw new BadRequestException("Ci sono stati errori nel payload!");
+        }
+        // Ovunque ci sia un body bisognerebbe validarlo!
+        return this.dipendenteService.findByIdAndUpdate(id, body);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void findByIdAndDelete(@PathVariable long id) {
+        this.dipendenteService.findByIdAndDelete(id);
     }
 }
