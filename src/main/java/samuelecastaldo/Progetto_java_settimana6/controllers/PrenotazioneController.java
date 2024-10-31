@@ -9,7 +9,6 @@ import samuelecastaldo.Progetto_java_settimana6.entities.Prenotazione;
 import samuelecastaldo.Progetto_java_settimana6.exceptions.BadRequestException;
 import samuelecastaldo.Progetto_java_settimana6.payloads.NewPrenotazioneDTO;
 import samuelecastaldo.Progetto_java_settimana6.services.PrenotazioneService;
-import samuelecastaldo.Progetto_java_settimana6.services.PrenotazioneService;
 
 import java.util.List;
 import java.util.stream.Collectors;

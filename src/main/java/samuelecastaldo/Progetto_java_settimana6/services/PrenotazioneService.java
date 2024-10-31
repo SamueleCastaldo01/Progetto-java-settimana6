@@ -9,7 +9,6 @@ import samuelecastaldo.Progetto_java_settimana6.exceptions.BadRequestException;
 import samuelecastaldo.Progetto_java_settimana6.exceptions.NotFoundException;
 import samuelecastaldo.Progetto_java_settimana6.payloads.NewPrenotazioneDTO;
 import samuelecastaldo.Progetto_java_settimana6.repositories.PrenotazioneRepository;
-import samuelecastaldo.Progetto_java_settimana6.repositories.PrenotazioneRepository;
 
 import java.util.List;
 

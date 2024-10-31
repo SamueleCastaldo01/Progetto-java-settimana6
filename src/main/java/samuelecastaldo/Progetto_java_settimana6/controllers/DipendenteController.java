@@ -12,7 +12,6 @@ import samuelecastaldo.Progetto_java_settimana6.payloads.NewDipendenteDTO;
 import samuelecastaldo.Progetto_java_settimana6.services.DipendenteService;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController

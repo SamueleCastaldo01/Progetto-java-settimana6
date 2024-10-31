@@ -13,7 +13,6 @@ import samuelecastaldo.Progetto_java_settimana6.repositories.DipendenteRepositor
 
 import java.io.IOException;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class DipendenteService {

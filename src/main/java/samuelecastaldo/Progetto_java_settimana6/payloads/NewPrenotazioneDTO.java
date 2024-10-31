@@ -1,6 +1,5 @@
 package samuelecastaldo.Progetto_java_settimana6.payloads;
 
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
