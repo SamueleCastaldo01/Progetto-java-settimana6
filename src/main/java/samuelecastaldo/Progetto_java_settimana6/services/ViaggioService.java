@@ -43,6 +43,12 @@ public class ViaggioService {
         return this.viaggioRepository.save(found);
     }
 
+    public Viaggio findByAndUpdateStato(long id, String newStato) {
+        Viaggio found = this.findById(id);
+        found.setStato(newStato);
+        return this.viaggioRepository.save(found);
+    }
+
     //DELETE --------------------------------------------
     public void findByIdAndDelete(long id) {
         Viaggio found = this.findById(id);

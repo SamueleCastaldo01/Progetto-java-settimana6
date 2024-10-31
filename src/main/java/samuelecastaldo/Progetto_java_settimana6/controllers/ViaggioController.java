@@ -52,6 +52,12 @@ public class ViaggioController {
         return this.viaggioService.findByIdAndUpdate(id, body);
     }
 
+    //{{base_url}}/viaggio/1/stato?newStato=completato
+    @PutMapping("/{id}/stato")
+    public Viaggio updateStato(@PathVariable long id, @RequestParam String stato) {
+        return viaggioService.findByAndUpdateStato(id, stato);
+    }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void findByIdAndDelete(@PathVariable long id) {
