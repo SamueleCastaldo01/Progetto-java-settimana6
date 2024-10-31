@@ -5,57 +5,57 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import samuelecastaldo.Progetto_java_settimana6.entities.Dipendente;
+import samuelecastaldo.Progetto_java_settimana6.entities.Prenotazione;
 import samuelecastaldo.Progetto_java_settimana6.exceptions.BadRequestException;
-import samuelecastaldo.Progetto_java_settimana6.payloads.NewDipendenteDTO;
-import samuelecastaldo.Progetto_java_settimana6.services.DipendenteService;
+import samuelecastaldo.Progetto_java_settimana6.payloads.NewPrenotazioneDTO;
+import samuelecastaldo.Progetto_java_settimana6.services.PrenotazioneService;
+import samuelecastaldo.Progetto_java_settimana6.services.PrenotazioneService;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/dipendente")
-public class DipendenteController {
+@RequestMapping("/prenotazione")
+public class PrenotazioneController {
 
     @Autowired
-    DipendenteService dipendenteService;
+    PrenotazioneService prenotazioneService;
 
     @GetMapping
-    public List<Dipendente> findAll() {
-        return this.dipendenteService.findAll();
+    public List<Prenotazione> findAll() {
+        return this.prenotazioneService.findAll();
     }
 
     @GetMapping("/{id}")
-    public Dipendente findById(@PathVariable long id) {
-        return this.dipendenteService.findById(id);
+    public Prenotazione findById(@PathVariable long id) {
+        return this.prenotazioneService.findById(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Dipendente save(@RequestBody @Validated NewDipendenteDTO body, BindingResult validationResult) {
+    public Prenotazione save(@RequestBody @Validated NewPrenotazioneDTO body, BindingResult validationResult) {
         if (validationResult.hasErrors()) {
             String message = validationResult.getAllErrors().stream().map(objectError -> objectError.getDefaultMessage())
                     .collect(Collectors.joining(". "));
             throw new BadRequestException("Ci sono stati errori nel payload! " + message);
         }
 
-        return this.dipendenteService.save(body);
+        return this.prenotazioneService.save(body);
     }
 
     @PutMapping("/{id}")
-    public Dipendente findByIdAndUpdate(@PathVariable long id, @RequestBody @Validated NewDipendenteDTO body, BindingResult validationResult) {
+    public Prenotazione findByIdAndUpdate(@PathVariable long id, @RequestBody @Validated NewPrenotazioneDTO body, BindingResult validationResult) {
         if (validationResult.hasErrors()) {
             validationResult.getAllErrors().forEach(System.out::println);
             throw new BadRequestException("Ci sono stati errori nel payload!");
         }
         // Ovunque ci sia un body bisognerebbe validarlo!
-        return this.dipendenteService.findByIdAndUpdate(id, body);
+        return this.prenotazioneService.findByIdAndUpdate(id, body);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void findByIdAndDelete(@PathVariable long id) {
-        this.dipendenteService.findByIdAndDelete(id);
+        this.prenotazioneService.findByIdAndDelete(id);
     }
 }

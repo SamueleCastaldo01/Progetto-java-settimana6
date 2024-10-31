@@ -28,8 +28,8 @@ public class ViaggioService {
 
     //POST --------------------------------------------
     public Viaggio save(NewViaggioDTO body) {
-        Viaggio newAutore = new Viaggio(body.destinazione(), body.data(), body.stato());
-        return this.viaggioRepository.save(newAutore);
+        Viaggio newViaggio = new Viaggio(body.destinazione(), body.data(), body.stato());
+        return this.viaggioRepository.save(newViaggio);
     }
 
     //PUT --------------------------------------------
