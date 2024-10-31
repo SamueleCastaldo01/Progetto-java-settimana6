@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import samuelecastaldo.Progetto_java_settimana6.entities.Viaggio;
 import samuelecastaldo.Progetto_java_settimana6.exceptions.BadRequestException;
 import samuelecastaldo.Progetto_java_settimana6.payloads.NewViaggioDTO;
+import samuelecastaldo.Progetto_java_settimana6.payloads.UpdateStatoDTO;
 import samuelecastaldo.Progetto_java_settimana6.services.ViaggioService;
 
 import java.util.List;
@@ -52,9 +53,14 @@ public class ViaggioController {
         return this.viaggioService.findByIdAndUpdate(id, body);
     }
 
-    //{{base_url}}/viaggio/1/stato?newStato=completato
     @PutMapping("/{id}/stato")
-    public Viaggio updateStato(@PathVariable long id, @RequestParam String stato) {
+    public Viaggio updateStato(@PathVariable long id, @RequestBody @Validated UpdateStatoDTO body, BindingResult validationResult) {
+        if (validationResult.hasErrors()) {
+            String message = validationResult.getAllErrors().stream().map(objectError -> objectError.getDefaultMessage())
+                    .collect(Collectors.joining(". "));
+            throw new BadRequestException("Ci sono stati errori nel payload! " + message);
+        }
+        String stato = body.stato();
         return viaggioService.findByAndUpdateStato(id, stato);
     }
 
