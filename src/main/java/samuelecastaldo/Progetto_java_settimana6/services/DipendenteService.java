@@ -1,13 +1,17 @@
 package samuelecastaldo.Progetto_java_settimana6.services;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import samuelecastaldo.Progetto_java_settimana6.entities.Dipendente;
 import samuelecastaldo.Progetto_java_settimana6.exceptions.BadRequestException;
 import samuelecastaldo.Progetto_java_settimana6.exceptions.NotFoundException;
 import samuelecastaldo.Progetto_java_settimana6.payloads.NewDipendenteDTO;
 import samuelecastaldo.Progetto_java_settimana6.repositories.DipendenteRepository;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,6 +20,9 @@ public class DipendenteService {
 
     @Autowired
     private DipendenteRepository dipendenteRepository;
+
+    @Autowired
+    private Cloudinary cloudinaryUploader;
 
     //GET --------------------------------------------
     public List<Dipendente> findAll() {
@@ -67,6 +74,16 @@ public class DipendenteService {
     public void findByIdAndDelete(long id) {
         Dipendente found = this.findById(id);
         this.dipendenteRepository.delete(found);
+    }
+
+    public String uploadAvatar(MultipartFile file) {
+        String url = null;
+        try {
+            url = (String) cloudinaryUploader.uploader().upload(file.getBytes(), ObjectUtils.emptyMap()).get("url");
+        } catch (IOException e) {
+            throw new BadRequestException("Ci sono stati problemi con l'upload del file!");
+        }
+        return url;
     }
 
 }

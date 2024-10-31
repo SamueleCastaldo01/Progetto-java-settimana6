@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import samuelecastaldo.Progetto_java_settimana6.entities.Dipendente;
 import samuelecastaldo.Progetto_java_settimana6.exceptions.BadRequestException;
 import samuelecastaldo.Progetto_java_settimana6.payloads.NewDipendenteDTO;
@@ -57,5 +58,10 @@ public class DipendenteController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void findByIdAndDelete(@PathVariable long id) {
         this.dipendenteService.findByIdAndDelete(id);
+    }
+
+    @PatchMapping("/{id}/avatar")
+    public String uploadAvatar(@RequestParam("avatar") MultipartFile file) {
+        return this.dipendenteService.uploadAvatar(file);
     }
 }
