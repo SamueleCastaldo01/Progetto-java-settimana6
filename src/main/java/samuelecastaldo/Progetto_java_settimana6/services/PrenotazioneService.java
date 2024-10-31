@@ -39,6 +39,11 @@ public class PrenotazioneService {
         Dipendente dipendente = this.dipendenteService.findById(body.id_dipendente());
         Viaggio viaggio = this.viaggioService.findById(body.id_viaggio());
 
+        prenotazioneRepository.findByDipendenteAndDataPrenotazione(dipendente, body.dataPrenotazione())
+                .ifPresent(existingPrenotazione -> {
+                    throw new BadRequestException("Il dipendente ha già una prenotazione per questa data");
+                });
+
         Prenotazione newPrenotazione = new Prenotazione(viaggio, dipendente, body.dataPrenotazione(), body.note(), body.preferenze());
         return this.prenotazioneRepository.save(newPrenotazione);
     }
